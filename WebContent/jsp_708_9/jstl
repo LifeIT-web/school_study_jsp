@@ -1,0 +1,307 @@
+. Expression Language (표현 언어)
+
+: JSP 에서 브라우저 출력은 주로 표현식 태그를 사용함.
+
+  <%= request.getParameter("userid") %>
+  
+  위와 같은 태그를 간단히 줄이는 방법으로
+  EL(Expression Language) 를 사용함
+  
+  1. ${ param.userid }
+  2. ${ param['userid'] }
+  3. ${ param["userid"] }
+  	
+  	를 사용한다.
+  	
+  : EL은 반드시 $으로 시작하고 $ 와 { 사이에 공백이 없어야 한다.
+  
+  
+  . 표현언어는 $로 시작한다.
+  . 표현언어의 문장 구조는 ${ exp } 와 같다.
+  . 표현식 exp 에는 산술, 관계, 논리와 같은 기본적인 연산이 가능함.
+  . 표현식은 [객체명].[객체명, 속성명], [객체명[첨자]], [객체명["속성명"]], [객체명['속성명']]
+      과 같은 구조로 구성됨.
+      
+      
+     표현언어에서 사용되는 Literals(리터럴, 상수)는
+     
+     . 논리값 true, false
+     . 자바에서 이용되는 정수 1, -5,,,
+     . 자바에서 이용되는 실수 3.1, 4.5E+5,,,
+     . 문자열은 'java', "java" 와 같이 큰따옴표, 작은 따옴표 가능
+     . null : 아무것도 없다는 의미
+    
+   
+   	  EL은 자바스크립트에서 확장된 Xpath에서 힌트를 얻어
+   	  만들어진 언어임. 그러나 EL은 값이 없는 변수(null)에
+   	  대해 좀 더 관대하고 데이터 형변환을 자동으로 해줌.
+   	  이러한 특징들은 질의 문자열을 처리하는데 주요하게 작용함.
+   	  질의 문자열은 서버로 전달될 때 항상 문자열로 보내는데
+   	  서버 프로그램 내에서는 int, boolean으로 사용해야
+   	  할 때가 있음. 이럴때 EL를 사용하면 값이 없거나
+   	  형 변환 등에 전혀 신경 쓸 필요 없이 사용할 수 있음
+   	  
+   	  EL 표현
+   	  
+   	  ${true}
+   	  ${false}
+   	  ${123}
+   	  ${3.14}
+   	  ${"JAVA"}
+   	  ${'java'}
+   	  
+   	  EL 연산자
+   	  
+   	  	산술연산자 : +, -, *, /, %, mode
+   	  	논리연산자 : &&, ||, !, and, or, not
+   	  	비교연산자 : ==, !=, <, >, <=, >=, eq, ne, lt, get, le, ge
+   	  	
+   	  	empty연산자 : 값이 null이거나 공백문자인지를 판단하는 연산식
+   	  	${empty ""} -> true
+   	  	${empty null} -> true
+   	  	
+   	  내장 객체
+   	  	
+   	  	JSP 페이지에서 내장 객체를 지원했음
+   	  	내장 객체란, 내부적으로 변수 선언과 초기화 작업이
+   	  	자동으로 되는 객체로서 개발자는 내장 객체를 사용할 때
+   	  	참조변수의 이름을 기억하고 있다가 참조변수로 바로 접근하여
+   	  	사용할 수 있음, EL에서도 JSP처럼 내장 객체를 지원하므로
+   	  	필요한 객체는 내장 객체를 참조 변수 이름으로 곧바로 사용할 수 있음
+   	  	
+   	 EL에서 지원하는 내장 객체
+   	 	
+   	 	내장객체									의미
+   	 	
+   	 	pageContext							JSP 내장 객체 pageContext와 같음
+   	 	
+   	 	pageScope							pageContext에 등록된 데이터의 이름과 값을
+   	 										저장하고 있는 map객체(현재보여지는 페이지의 범위)
+   	 										
+   	 	requestScope						HttpServletRequest에 등록된 데이터의
+   	 										이름과 값을 저장하고 있는 map객체(요청하는 페이지까지의 범위)
+   	 										
+   	 	sessionScope						HttpSession에 등록된 데이터의 이름과 값을
+   	 										저장하고 있는 map객체(웹브라우저자체 범위)
+   	 										
+   	 	applicationScope					ServletContext에 등록된 데이터의
+   	 										이름과 값을 저장하고 있는 map객체(서버가 돌아가는 동안까지 범위)
+   	 	
+   	 	param								QueryString의 이름과 값을 저장하고 있는 map객체
+   	 	
+   	 	paramValues							같은 이름으로 전달된 질의 문자열의
+   	 										이름과 값들을 저장하고 있는 map객체
+   	 										
+   	 	cookie								요청을 보낸 클라이언트의 쿠기 이름과 값을
+   	 										저장하고 있는 map객체
+   	 										
+   	 	initParam							웹 애플리케이션에 저장한 초기 파라미터의
+   	 										이름과 값을 저장하고 있는 map객체
+   	 										
+   	 										
+   	 	
+   	 	. JSTL(JSP Standard Tag Library)
+   	 	
+   	 	: JSTL은 JSP의 기본 태그가 아닌 JSP 확장 태그이다.
+   	 	
+   	 	  사용하려면 JSTL API 및 자바 구현체의 2개 라이브러리
+   	 	  혹은 API와 구현체가 함께 번들 형태로 구성되어 있는 라이브러리가
+   	 	  필요함
+   	 	  
+   	 	. taglib 지시자 선언
+   	 	
+   	 	  자바에서 import문을 선언하듯 JSP에서도 JSTL 확장 태그를
+   	 	  사용하려면 taglib 지시자로 라이브러리를 선언해야 한다.
+   	 	  
+   	 	  다음은  JSTL Core 태그 선언문이다.
+   	 	  
+   	 	  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+   	 	  
+   	 	  : JSTL 은 자바에서 커스텀 태그 기능을 이용하여
+   	 	      활용빈도가 높은 태그를 개발, 발표한 것이 자바 표준 태그 라이브러리(JSTL)
+   	 	      이다.
+   	 	      즉 JSTL 은 표준 커스텀 태그라 할 수 있다
+   	 	      
+   	 	    JSTL 은 여러 태그를 5가지 부류로 나누어 제공한다.
+   	 	    
+   	 	    
+   	 	    분류						세부영역				 	접두어					URI
+   	 	    					
+   	 	 						변수지원									
+   	 	 						제어흐름						c				http://java.sun.com/jsp/jstl/core		
+   	 	  Core					URL 관리	
+								출력, 예외처리   	 	  
+   	 	  
+   	 	  						코어
+   	 	  XML					흐름제어						x				http://java.sun.com/jsp/jstl/xml
+   	 	  						변환
+   	 	  
+   	 	  						지역화(locale)
+   	Internationalization		메시지 포멧						fmt				http://java.sun.com/jsp/jstl/fmt
+   								수와 날씨 포멧
+   	
+   	
+   		Database				SQL							sql				http://java.sun.com/jsp/jstl/sql
+   		
+   								집합체 길이
+   		Functions				문자열 처리						fn				http://java.sun.com/jsp/jstl/functions
+   					
+   					
+   					
+   		. 코어 태그 라이브러리
+   		
+   		: 코어 태그는 JSTL 에서 가장 기본이 되며 가장 많이 사용되는 애그로
+   		  변수 지원, 제어흐름, URL관리, 예외처리, 출력을 위한 태그로 구성됨
+   		  
+   		  분류					태그						기능
+   		  
+   		--------------------------------------------------------------------------------
+   		  
+   		변수 지원				remove				이미 설정한 변수를 삭제
+   		
+   							 set				범위에서 사용한 변수를 지정
+   							 
+   		--------------------------------------------------------------------------------
+   		
+   		제어 흐름				choose				태그 <when>과 <otherwise> 로 
+   												구성되어 있는 여러개의 조건속에서 하나만 선정하여 처리
+   												 
+   							when				<choose> 태그의 서브 태그로 조건이 true 이면 실행
+   							
+   							otherwise			<choose> 태그의 서브 태그로 이전의 <when> 에서
+   												조건이 모두 false 이면 <otherwise> 내용을 실행
+   												
+   							foreach				다양한 콜렉션 유형에서 반복을 처리
+   							
+   							forTokens			문자열을 구분자로 구분하여 토큰으로 나누어 처리
+   							
+   							if					조건이 true 이면 실행
+   		
+   		--------------------------------------------------------------------------------
+   		
+   							import				다른 페이지를 현재 위치, 또는 변수에 저장
+   							
+   							param				태그<import>, <redirect>, <url>와 서브 태그로
+   		URL 관리									매개 변수 전송 처리
+   												
+   							redirect			새로운 URL로 이동 처리
+   							
+   							url					질의 매개 변수를 이용하여 URL 생성
+   							
+   		---------------------------------------------------------------------------------
+   		
+   		예외처리				catch				예외 처리
+   		
+   		---------------------------------------------------------------------------------
+   		
+   		출력					out					출력 처리
+   		
+   		
+   		
+   		SET 속성
+   		
+   		
+   		속성					기본값					자료유형								기능
+   		
+   		var											String							값이 저장되는 변수 이름
+   		
+   		target										String							값이 저장되는 자바빈즈 객체이거나
+   																					또는 MAP 자바빈즈의 경우 setter인
+   																					property에 의해 값이 지정
+   																					
+   		value										String							변수 또는 객체에 저장힐 값
+   		
+   		property									String							target 객체의 property	이름
+   		
+   																					변수가 효력을 발휘하는 영역으로 
+   		scope				page					String							page, request, session, application중의
+   																					하나를 지정
+   																					
+   		
+   		JSP 내장 객체의 영역
+   		
+   		JSP 기반의 웹 애플리케이션은
+   		page영역, request영역, session영역, application영역,
+   		네 가지로 나뉨. 각각의 영역에 관한 정보는 영역과 연결된 내장 객체를 
+   		이요하여 접근할 수 있음
+   		
+   		영역					내장객체								의미
+   		
+   		page				pageContext					하나의 JSP페이지 내에서 속하는 영역으로,
+   														하나의 JSP페이지 안에서만 공유할 값을 저장됨
+   		
+   		request				request						한 번의 요청에 대한 정보가 저장되는 영역
+   														웹 브라우저가 요청을 보낼 때마다
+   														새로운 request영역이 되고 request 객체를
+   														이용하여 모든 JSP페이지에서 접근 가능
+   														
+   		
+   		session				session						한명의 사용자와 관련된 정보가 저장되는 영역
+   														사용자가 이용하는 웹 브라우저 하나 당
+   														영역이 존재하기 때문에 주로 로그인 정보를 저장
+   		
+   		application			application					모든 사용자가 이용할 수 있는 정보를 저장하는 영역
+   														하나의 웹 어플리케이션에 대한 요청, 세션 등과
+   														같은 모든 정보는 application 영역에 속함
+   														주로 웹 어플리케이션의 설정 정보를 저장
+   														
+   														
+   														
+   														
+   		<c:choose> 태그
+   		
+   		<c:choose> 태그는 조건에 따른 여러곳으로 분기 가능하고,
+   		조건이 맞은 것이 없을 경우 기본 분기를 제공할 수 있음
+   		
+   		<c:choose>
+   		
+   			<c:when test="${name eq '김철수'}"> ... </c:when> // else if
+   			
+   			<c:when test="${name eq '박영희'}"> ... </c:when> // else if
+   			
+   			<c:otherwise> ... </c:otherwise>  // else
+   			
+   		</c:choose>
+   		
+   		위 코드는 이름이 "김철수", "박영희" 일 경우
+   		분기 하고 그외의 경우에는 <c:otherwise>로 분기함.
+   		
+   		
+   		비교연산자의 조합으로 논리 연산을 할 수 있는 논리연산자임.
+   		
+   		* add(&&) : 모두 참일때 참이됨
+   		
+   			- <c:if test="${a > b and c < d}">
+ 
+   			- <c:if test="${a > b && c < d}">
+   			
+   		* or(||) : 둘 중 하나라도 참이면 참이됨.
+   		
+   			- <c:if test="${a > b or c < d}">
+ 
+   			- <c:if test="${a > b || c < d}">
+   			
+   		* not (!) : 논리를 반전함.
+   		
+   			- <c:if test="${not a == ''}">
+
+   			- <c:if test="${! a == ''}">
+   			
+   		*  ne (!=) : 문자열 또는 숫자가 다르면 참임
+   		
+   			(name이 문자일때)
+   			- <c:if test="${name != '홍길동'}">
+ 
+   			- <c:if test="${name ne '홍길동'}">
+			
+			(name이 숫자일때)
+   			- <c:if test="${name != 5}">
+ 
+   			- <c:if test="${name ne 5}">
+   			
+   			
+prefix="c" 는 Core uri=".../core"의 c 
+prefix="x" 는 XML uri=".../xml"의 x ..
+근데 prefix의 값은 마음대로 정해도 uri만 잘 적는다면 잘 출력됨
+단 prefix를 cw:으로 정했다면 각 태그에 <c: 이 아닌 <cw:로 적어야 오류가 안뜸 
+(jstl_catch의 내용 주석처리해도 오류나길래 여기다 적음)

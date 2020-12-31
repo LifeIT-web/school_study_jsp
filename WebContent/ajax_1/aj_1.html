@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>자바스크립트로 Ajax 구현하기</title>
+
+<!-- https://velog.io/@surim014/AJAX%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%B8%EA%B0%80 -->
+<!-- https://developer.mozilla.org/ko/docs/Web/Guide/AJAX/Getting_Started -->
+
+<script type="text/javascript">
+	window.onload = function() {
+		var xhr;
+		
+		// 구버전을 위한 호환성 코드임.
+		if(window.XMLHttpRequest){ // 모질라, 사파리, IE7...
+			xhr = new XMLHttpRequest();
+		}else if(window.ActiveXObject){ // IE 6 이하
+			xhr = new ActiveXObject("Msxml2.XMLHTTP");
+		}else{
+			throw new Error("Ajax를 지원하지 않는 브라우저임.");
+		}
+		
+		xhr.onreadystatechange = function() {
+			if(xhr.readyState == 4){ // 4 => request애 대한 처리가 끝났으며 응답함
+				if(xhr.status >= 200 && xhr.status < 300){
+					// 100 => 처리중
+					// 200 => 성공
+					// 300 => 리다이렉트(페이지 이동)
+					// 400 => 클라이언트 오류(사용자 측)
+					// 500 => 서버 오류
+					
+					document.getElementById('container').innerHTML = xhr.responseText;
+				}
+			}
+		}
+		
+		xhr.open('GET', 'resource.html');
+		xhr.send('');
+		
+	}
+
+</script>
+</head>
+<body>
+
+<div id="container"></div>
+
+</body>
+</html>

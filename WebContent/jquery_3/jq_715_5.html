@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>엘리먼트의 태그 내부의 HTML 콘텐츠 변경하기</title>
+
+<style>
+	.red{ color: red;}
+</style>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+<script type="text/javascript">
+	$(function() {
+		$("button").click(function() {
+			$("div").html("<span class='red'>엘리먼트의 태그 내부의" + " <b>HTML 콘텐츠 변경하기 </b></span>")
+		});
+	});
+	
+	/* 
+		# : id 선택자 => 어떤 요소에 대해 유일한 특성을 정의함.
+					   (HTML 문서에서 특정 ID 속성값은 오직 하나만
+					     있어야 합니다.)
+					     
+		. : class 선택자 => class 속성은 어떤 분류안에 포함된 요소의 
+						  특성을 정의 하는데 사용됨.
+	*/
+</script>
+</head>
+<body>
+
+<button> 클릭 </button>
+
+<div></div>
+<div></div>
+<div></div>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>엘리먼트 집합들을 한 번에 처리하기</title>
+
+<script type="text/javascript" src="../js/jquery.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("img").attr( {
+			src: "../images/im4.jpg",
+			title: "야용양",
+			alt: "cat picture",
+			width: "130px",
+			height: "130px"
+		});
+		
+		$("div").text($("img").attr("alt"));
+	});
+</script>
+</head>
+<body>
+
+	<img /> <img /> <img />
+	<div>어트리뷰트 연습</div> 
+</body>
+</html>

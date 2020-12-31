@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>엘리먼트로부터 클래스 제거하기</title>
+
+<style>
+p{ margin: 40px; font-size: 20px; font-weight: bolder;}
+.red { color: red;}
+.under { text-decoration: underline;}
+.highlight{ background: yellow;}
+.highlight2{ background: cyan;}
+
+</style>
+
+<script type="text/javascript" src="../js/jquery.js"></script>
+
+<script type="text/javascript">
+	
+	$(function() {
+		$("p").addClass("red under");
+		$("#removeClass").click(function() {
+		$("p:even").removeClass("red under");
+	});
+		$("#changeClass").click(function() {
+		$("p:odd").removeClass("red under").addClass('highlight');
+	});
+		$("#lastClass").click(function() {
+		$("p:last").removeClass("red under").addClass('highlight2');
+	});
+});
+	
+</script>
+</head>
+<body>
+
+<button id="removeClass">removeClass</button>
+<button id="changeClass">changeClass</button>
+<button id="lastClass">lastClass</button>
+<p>엘리먼트로부터</p>
+<p>클래스를</p>
+<p>추가하고</p>
+<p>제거하는 </p>
+<p>연습하기</p>
+</body>
+</html>

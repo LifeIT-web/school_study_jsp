@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>엘리먼트의 어트리뷰트 값을 콜백 함수에서 얻어와서 설정하기</title>
+
+<script type="text/javascript" src="../js/jquery.js"></script>
+
+<script type="text/javascript">
+	$(function() {
+		$("img").attr({width: "100px", height: "100px"});
+				
+		$("img").attr("src", function() {
+			return "../images/" + this.title;
+		});/* 경로 설정 */
+		
+		$("img").attr("title", function(index) {
+			return index + "번 엘리먼트로 타이틀은" + this.title + "이다.";
+			
+		});/* 함수에 index를 쓰면 index는 별도 선언 없이 0번부터 시작함 */
+		
+	});
+	
+	/* 
+		.attr() : 어트리뷰트 값을 지정함.
+		
+		function(index) : 함수에 index를 기술하면 0 부터 시작되는
+						 인덱스가 함수로 전달됨.
+	*/
+</script>
+</head>
+<body>
+
+<img title="image1.jpg">
+<img title="image2.jpg">
+<img title="image3.jpg">
+</body>
+</html>

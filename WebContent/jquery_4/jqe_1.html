@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>DOM 엘리먼트에 이벤트 적용하기</title>
+
+<script type="text/javascript" src="../js/jquery.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$('a').bind('click', function() { 
+			// click이라는 이벤트를 적용시키는 bind헨들러 그의 대한 데이터값 function()에 넣었다.
+			$('img').attr("src", $(this).attr("href"));
+			return false;
+		});
+	});
+	
+	/* 
+		bind() : 엘리먼트에 이벤트 헨들러를 지정한다.
+				 bind()를 통해 해당 엘리먼트에 원하는 이벤트를 적용함
+	*/
+
+</script>
+
+</head>
+<body>
+
+<ul>
+<li><a href="../images/thongge.jpg">똘똘이 사진</a></li>
+<li><a href="../images/blue.jpg">눈물이 난다 사진</a></li>
+</ul>
+
+<img>
+
+</body>
+</html>

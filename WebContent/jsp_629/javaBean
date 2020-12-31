@@ -1,0 +1,47 @@
+. JavaBean
+
+: 자바 빈즈는 자바 프로그램에서 특정한 작업인 비즈니스 로직을
+   독립적으로 수행하는 하나의 프로그램 단위임.
+   
+   자바뿐만 아니라 일반 프로그래밍 분야 중 큰 프로그램에서 독립적으로
+   수행되는 하나의 작은 프로그램을 Component 라고 부름.
+  그러므로 자바빈즈는 자바 프로그램에서 컴포넌트이며 넓은 의미로
+  자바빈즈는 자바의 모든 클래스를 의미할 수도 있음
+  
+  이러한 자바 빈즈를 활용한다면 한 번 작성된 자바빈즈는 여러 응용 프로그램에서
+  재사용하여 프로그램 개발 시간을 단축 할수 있는 장점이 있음
+  
+  . 자바 빈즈의 구성
+  
+  : 자바빈즈는 일반 자바 클래스임.
+  	자바빈즈는 member variables 인 fields 와 methods 로 구성됨
+  	자바빈즈의 필드는 일반적으로 외부에서 참조 할수 없도록 private 로
+  	선언되며, 외부에서 자바빈즈의 필드를 참조하기 위해서는 public 으로
+  	선언된 getter, setter를 제공함.
+  	
+  	
+  . 자바빈즈 태그의 사용(?)
+  
+  	<jsp:useBean id="test" class="ClassName" />
+  	
+  	=
+  	
+  	<% ClassName test = new ClassName(); %>
+  	
+  	------------------------------------------------------------
+  	
+  	<jsp:useBean id="test" class="ClassName" scope="application" />
+  	
+  	<jsp:setProperty name="test" property="name" value="홍길동" />
+
+  	<jsp:setProperty name="test" property="name" param="userName" />
+  	
+  	=> <% test.setName(request.getParameter("userName")); >
+  	
+  	---------------------------------------------------------------
+  	
+  	<jsp:useBean id="test" class="ClassName" scope="application" />
+  	
+  	<jsp:getProperty name="test" property="name" />
+  	
+  	=> <%= test.getName() %>

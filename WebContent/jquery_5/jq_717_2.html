@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> 해당 엘리먼트를 사라지게 하기 </title>
+<style>
+span {
+	display : none
+}
+/*
+	display : none
+	박스가 없기 때문에 공간을 차지하지 않습니다.	
+*/
+
+</style>
+
+<script type="text/javascript" src = "../js/jquery.js"></script>
+
+<script type="text/javascript">
+	$(function(){
+		$("button:eq(0)").click(function(){
+			$("span:first").show();
+		});
+		$("button:eq(2)").click(function(){
+			$("span:eq(1)").show("slow",function(){
+				$(this).css('background','yellow');
+			});
+		});
+		
+		$("button:eq(1)").click(function(){
+			$("span:first").hide();
+		});
+		$("button:eq(3)").click(function(){
+			$("span:eq(1)").hide("slow",function(){
+				$(this).css('background','');
+				// background 를 없애버려라
+			});
+		});	
+		
+		
+		
+		$("button:eq(4)").click(function(){
+			$("span:last").show("slow",function(){
+				$(this).css('background','yellowgreen');
+			});
+		});
+			$("button:eq(5)").click(function(){
+				$("span:last").hide("slow",function(){
+					$(this).css('background','');
+					// background 를 없애버려라
+				});
+			});
+		
+	});
+/*
+ *  hide() : 엘리먼트를 사라지게 만듭니다.
+ */
+
+</script>
+</head>
+<body>
+
+	<button> Show It </button>
+	<button> Hide It </button>
+	<span> 안녕하세요. </span>
+	
+	<button> Show It </button>
+	<button> Hide It </button>
+	<span> 반갑습니다. </span>
+	
+	<button> Show It </button>
+	<button> Hide It </button>
+	<span> 지겨워요. </span>
+
+</body>
+</html>

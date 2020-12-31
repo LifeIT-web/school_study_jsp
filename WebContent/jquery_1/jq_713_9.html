@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>조건에 만족하는 첫 번째와 마지막 엘리먼트에 스타일을 적용하기- :first, :last</title>
+<style>
+	table { table-layout: auto; width:75%; }
+	td{ color: blue; font-weight: bold;}
+	
+	.selectedstyle{ color: red; font-size: 20pt; background-color: pink;}
+
+</style>
+
+<script type="text/javascript" src="../js/jquery.js"></script>
+
+<script type="text/javascript">
+ $(document).ready(function() {
+	$('tr:first').addClass('selectedstyle');
+	$('tr:last').addClass('selectedstyle');
+	
+	console.log("조건에 만족하는 첫번째 엘리먼트 : " + $('tr:first').text());
+	console.log("조건에 만족하는 마지막 엘리먼트 : " + $('tr:last').html());
+});
+
+</script>
+</head>
+<body>
+<table>
+
+	<tr><td>one</td></tr> 
+	<!-- <tr><td> 등 각각 태그에 속성을 줬을 경우 우선순위는 가장 안에 있는 <td>태그다 -->
+	<tr><td>two</td></tr>
+	<tr><td>three</td></tr>
+	<tr><td>four</td></tr>
+	<tr><td>five</td></tr>
+
+</table>
+</body>
+</html>

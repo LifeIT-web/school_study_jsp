@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>인접함 자손 엘리먼트를 노드로 추가하기</title>
+<style>
+em,strong {
+	font-size: 20pt; line-height: 30pt;
+	margin: 20px; color: blue;
+}
+
+</style>
+
+<script type="text/javascript" src="../js/jquery.js"></script>
+
+<script type="text/javascript">
+	$(document).ready(function () {
+	$('p em').css('background-color', 'yellow').each(function() {
+		/* p(조상) ~ em(자손) 사이만 적용 */
+		$('.result1').append($(this).text() + "\n");
+	});
+	/* each()함수 설명 png참고 */
+	
+	$('div > em').css('background-color', 'pink').each(function() {
+		/* div(부모) ~ em(자식) 사이만 적용 */
+		$('.result2').append($(this).text() + "\n");
+	});
+	
+	$('#am em').css('background-color', 'green').each(function() {
+		$('.result3').append($(this).text() + "\n");
+	});
+	
+	console.log("검색된 엘리먼트 갯수 : " + $('p em').length);
+	console.log("검색된 엘리먼트 갯수 : " + $('div > em').length);
+	console.log("검색된 엘리먼트 갯수 : " + $('#am em').length);
+	
+	});
+	
+	/* 
+	css('css 프로퍼티이름', '값') => CSS 프로퍼티와 값을 기술하여 스타일을
+								적용한다.
+
+	$(this)  => 현재 선택중인 요소
+	
+	*/
+		
+</script>
+</head>
+<body>
+
+	<p>
+		<em>one</em>
+		<em>two</em>
+		<span><em>three</em></span>
+	</p>
+
+<!-- https://zetawiki.com/wiki/JQuery_셀렉터 (참고) -->
+
+	<div>
+		<em>four</em>
+		<span><em>five</em></span>
+		<!-- span이(자식) em이 (자손)관계가 되어 효과를 적용할 수 없다. -->
+		<em>six</em>
+	</div>
+	
+	<div id="am">
+		수선화
+		<em>무궁화</em>
+		제비꽃
+		<em>할미꽃</em>
+		<em>코스모스</em>
+	</div>
+	
+	<hr size="5" color="red">
+	
+	<div>
+		<span>ancestor descendant로 검색된 엘리먼트 : </span>
+		<span class="result1"></span>
+	</div>
+	<div>
+		<span> parent &gt; child로 검색된 엘리먼트 : </span>
+		<span class="result2"></span>
+	</div>
+	<div>
+		<span> ancestor descendant로 검색된 엘리먼트 : </span>
+		<span class="result3"></span>
+	</div>
+</body>
+</html>

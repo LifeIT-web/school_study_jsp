@@ -1,0 +1,81 @@
+ .  Connection Pool 사용하기 (JNDI, Context, DataSource)
+ 
+ 	: 기존의 웹 서버는 DB에 접근할 때마다 DB의 커넥션을 만들고,
+ 	  커넥션을 해제하는 작업이 필요함.
+ 	  이러한 작업은 DB 성능에 악영향을 끼칩니다. ( = JDBC의 문제점)
+ 	  
+ 	  따라서 커넥션을 미리 만들어놓고 요청이 들어오면 Connection Pool에서
+ 	  connection을 제공하고, 작업이 끝나면 connection pool에
+ 	  
+ 	  반납하는 과정을 거치도록 구현하면 불필요한 작업을 제거할 수 있음
+ 	  
+ 	  (https://fora.tistory.com/71)
+ 	  
+  . DataSource
+  
+  	: DataSource 객체는 Connection pool을 관리하는 객체임
+  	  이 객체는 JNDI(Java Naming Directory Interface) 서버를
+  	  통해서 이용됨.
+  	  
+  	  
+  	 [사용 절차]
+  	 
+  	 1. JNDI Server에서 lookup() 메소드를 호출해 DataSource 객체를 얻음
+  	 2. DataSource의 getConnection() 메소드를 호출해 Connection 객체를 얻음
+  	 3. Connection을 가지고 DB 질의를 수행함.
+  	 4. 질의가 끝나면 Connection 객체를 close() 해줌
+  	 
+  . JNDI
+  
+  	: Java Naming & Directory Interface(이해 JNDI) 서비스는
+  	  "이름"을 가지고 "객체"를 얻을 수 있는 서비스라고 생각하면 됨
+  	  
+  	  DNS가 도메인으로부터 IP를 획득하는 서비스를 제공하는 것처럼
+  	  "이름"에 맺어진 "객체"를 반환하는 역할을 함.
+  	  
+  	  JNDI는 context.xml파일에
+  	  <Resource> 라는 태그로 등록할 수 있음
+  	  
+  	  [context.xml]
+  	  
+  	  <Resource
+  	  		auth="Container"
+  	  	1	driverClassName="com.mysql.cj.jdbc.Driver"
+  	  	2	url="jdbc:mysql://localhost/testDB"
+  	  	3	username="scott"
+  	  	4	password="tiger"
+  	  	5	name="jdbc/mysql"
+  	  	6	type="javax.sql.DataSource"
+  	  	7	maxTotal="4"
+  	  	8	maxWaitMillis="10000"
+  	  /> --> 입력해야 사용할수 있다.(사진참고)
+  	  
+  	  1. driverClassName : JDBC Driver의 경로를 입력함
+  	  2. url : 접속할 DB 서버의 url을 입력함
+  	  3. username : DB에 로그인할 계정 ID
+  	  4. password : DB에 로그인할 계정 패스워드
+  	  5. name : JNDI에 등록될 자원의 "이름"
+  	  6. type : JNDI에서 "이름"을 찾았을 때
+  	  		연결될 "객체" --> DataSource를 통해 Connection을 제어하기
+  	  			때문에 이를 지정함
+  	  7. maxTotal : 생성할 Connection의 개수를 지정
+  	  8. maxWaitMillis : 커넥션이 없을때 쓰레드가 기다리는 시간(ms)
+  	  					 이 시간이 끝나면 Exception이 발생함
+  	  					 
+  	  					 
+  	  
+  	  context.xml에 등록한 자원의 정보에 추가하면 좋은 옵션들이 있음.
+  	  
+  	  	removeAbandonedOnBorrow = "true"
+  	  	logAbandoned = "true"
+  	  	
+  	  1. removeAbandonedOnBorrow : 사용할 수 있는 커넥션이 부족해지면
+  	  				DBCP(DataBase Connection Pool)은 버려진 커넥션을 찾아 복구함.
+  	  				
+  	  2. logAbandoned : 커넥션 자원이 낭비되고 있는 위치를 로그로 출력함.
+  	  
+  	  		Connection Pool은 선택이 아닌 필수로 사용해야 하는 기술임.
+  	  
+  	  요즘은 jar로 복사해서 붙여넣고 할 필요없이 톰켓에 저장되어 있기에 번거로움이 최소화된다.
+  	  
+  	  (https://allg.tistory.com/20)

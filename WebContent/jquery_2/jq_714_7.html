@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>여러개의 취미를 체크박스에서 선택하기- :checkbox</title>
+
+<style>
+	div{padding: 5px 5px 5px 5px}
+	.item{float: left; width: 100px;}
+</style>
+
+<script type="text/javascript" src="../js/jquery.js"></script>
+
+<script type="text/javascript">
+	$(function () {
+		$('#selectBtn:button').click(function() {
+			var checkedList = "";
+			var checkedConsole = "";
+			$("input[name='hobby']:checkbox:not(:checked)").each(function() {
+				checkedList += $(this).next().text() + "\t";
+				checkedConsole += $(this).val() + "\t";
+			});
+			$('#contents').html(checkedList);
+			console.log(checkedConsole);
+		});
+	});
+</script>
+</head>
+<body>
+
+<div>
+<span class="item">music11</span>	<!-- prev().text() -->
+<input type="checkbox" name="hobby" value="음악감상">
+<span class="item">music22</span> <!-- next().text() -->
+</div>
+
+<div>
+<span class="item">요가11</span>
+<input type="checkbox" name="hobby" value="yoga">
+<span class="item">요가22</span>
+</div>
+
+<div>
+<span class="item">독서11</span>
+<input type="checkbox" name="hobby" value="reading">
+<span class="item">독서22</span>
+</div>
+
+<div>
+<span class="item">게임11</span>
+<input type="checkbox" name="hobby" value="game">
+<span class="item">게임22</span>
+</div>
+
+<div>
+<input type="button" id="selectBtn" value="취미선택">
+</div>
+
+<div id="contents"></div>
+
+</body>
+</html>

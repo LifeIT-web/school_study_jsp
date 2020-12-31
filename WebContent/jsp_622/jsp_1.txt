@@ -1,0 +1,55 @@
+  *	JSP 문법의 기본
+	
+	. 태그의 이용
+	
+  	  : JSP는 태그를 이용하여 고유한 문법을 기술하는 서버 프로그래밍 방식
+  	    JSP의 태그 방식은 Script Tag 와 Active Tag , Custom Tag 로 나뉨
+  	    
+  	    .Script Tag
+  	    
+  	    
+  	    종류					태그 형식						사용용도
+  	    
+  	 Directives(지시어)		<%@ ~ %>				JSP 페이지의 속성을 지정				
+  	 
+  	 Declaration(선언)		<%! ~ %>				소속 변수 선언과 메소드 정의
+  	 
+  	 Expression(표현식)		<%= ~ %>				변수, 계산식, 함수 호풀 결과를
+  	 												 문자열 형태로 출력
+  	 
+  	 Scriptlet(스크립트릿)		<%	~  %>				자바 코드를 기술
+  	 
+  	 Comments(주석)			<%-- ~ --%>				JSP 페이지의 설명을 추가
+  	 
+  	 
+  	 	.Action Tag / Custom Tag
+  	 		
+  	 	 : 액션 태그는 XML 스타일의 태그로 기술한 동작 기능을 수행하는 방식이며
+  	 	   , 커스텀 태그는 새로운 태그를 정의 하여 이용하는 방법
+  	 	   
+  	 
+  	 종류									태그 형식											사용용도	
+  	 
+  	 					<jsp:include page="test.jsp" />							현재 JSP 페이지에서 다른 페이지를 포함
+  	 					
+  	 					<jsp:forward page="test.jsp" />							현재 JSP 페이지의 제어를 다른 페이지에 전달
+  	 												
+  	 액션 태그				<jsp:plugin type="applet" code="test" />				자바 애플릿을 플러그인
+  	 
+  	 					<jsp:useBean id="login" class="LoginBean" />			자바빈 사용
+  	 					
+  	 					<jsp:setProperty name="login" property="pass" />		자바빈의 속성을 지정하는 메소드를 호출
+  	 					
+  	 					<jsp:getProperty name="login" property="pass" />		자바빈의 속성을 반환하는 메소드를 호출
+  	 					
+  	 					
+  	 					
+  	 
+  	 커스텀 태그			<tag:printData dbname="myDb" table="member" />			사용자가 직접 정의한 태그를 이용
+  	 
+  	 
+  	 
+  	 
+  	 
+  	 
+  	   

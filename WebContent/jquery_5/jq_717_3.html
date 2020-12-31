@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+span {
+	display : none;
+}
+</style>
+
+<script type="text/javascript" src = "../js/jquery.js"></script>
+
+<script type="text/javascript">
+	$(function(){
+		$("button:eq(0)").click(function(){
+			$("span:first").toggle();
+		});
+		
+		$("button:eq(1)").click(function(){
+			$("span:eq(1)").toggle("slow", function(){
+				$(this).css('background','yellow');
+			});
+		});
+		
+		$("button:eq(2)").click(function(){
+			$("span:eq(2)").toggle("slow", function(){
+				$(this).css('background','yellowgreen');
+			});
+		});
+		
+		/*
+			toggle() : 엘리먼트가 사라졌다 나타나도록 하는 상태 반복
+		*/
+		
+	});
+
+
+</script>
+</head>
+<body>
+
+	<button> Show It </button>
+	<span> 안녕하세요. </span>
+	
+	<button> Show It </button>
+	<span> 반갑습니다. </span>
+	
+	<button> Show It </button>
+	<span> 지겹습니다. </span>
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>엘리먼트의 어트리뷰트 값 제거하기</title>
+
+<script type="text/javascript" src="../js/jquery.js"></script>
+
+<script type="text/javascript">
+	
+
+	$(function() {
+  		
+  		var a = $("#img1").attr("src", src);
+		
+  		$(".btn").click(function() {
+		
+			$(this).prev().removeAttr("src");
+		});
+		
+		$("button").click(function() {
+			$(this).prev().prev().attr("src", "a");
+		});
+		
+	});
+</script>
+</head>
+<body>
+
+<img id="img1" alt="cat picture" src="../images/im4.jpg">
+<button class="btn"> 어트리뷰트값 제거하기 </button>
+<button> 어트리뷰트값 추가하기 </button>
+<img alt="puppy picture" src="../images/im0.jpg" title="똘똘이">
+</body>
+</html>
